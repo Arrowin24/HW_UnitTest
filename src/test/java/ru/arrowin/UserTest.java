@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.arrowin.exception.NotCorrectEmailException;
+import ru.arrowin.exception.UserParametersIsEqualException;
 
 class UserTest {
     @Test
@@ -41,12 +42,11 @@ class UserTest {
     }
 
     @Test
-    @DisplayName("When login is not equals email, then parammeter is correct")
-    void NotEqualsLoginAndMail() {
-        String login = "login";
+    @DisplayName("When login is not equals email, then parameters are correct")
+    void EqualsLoginAndMail() {
+        String login = "@d.ru";
         String email = "@d.ru";
-        User user = new User(login, email);
-        Assertions.assertNotEquals(user.getLogin(), user.getEmail());
+        Assertions.assertThrows(UserParametersIsEqualException.class, () -> new User(login, email), "It must throw exception!");
     }
 
 }

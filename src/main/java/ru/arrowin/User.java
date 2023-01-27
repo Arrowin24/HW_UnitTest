@@ -1,6 +1,7 @@
 package ru.arrowin;
 
 import ru.arrowin.exception.NotCorrectEmailException;
+import ru.arrowin.exception.UserParametersIsEqualException;
 
 public class User {
     private String login;
@@ -10,8 +11,12 @@ public class User {
     }
 
     public User(String login, String email) {
-        this.login = login;
-        setEmail(email);
+        if (loginAndMailIsNotEqual(login, email)) {
+            this.login = login;
+            setEmail(email);
+        } else {
+            throw new UserParametersIsEqualException();
+        }
     }
 
     private void setEmail(String email) {
@@ -20,6 +25,10 @@ public class User {
             return;
         }
         throw new NotCorrectEmailException();
+    }
+
+    private boolean loginAndMailIsNotEqual(String login, String email) {
+        return !login.equals(email);
     }
 
     public String getLogin() {

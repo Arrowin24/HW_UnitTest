@@ -27,7 +27,7 @@ class UserTest {
 
     @Test
     @DisplayName("When email has @ and '.' NOT at the end, then email is correct")
-    void CorrectMail() {
+    void correctMail() {
         String login = "login";
         String email = "mail@mail.ru";
         Assertions.assertDoesNotThrow(() -> new User(login, email));
@@ -35,7 +35,7 @@ class UserTest {
 
     @Test
     @DisplayName("When email has @ and '.' at the end, then email is NOT correct")
-    void NotCorrectMail() {
+    void notCorrectMail() {
         String login = "login";
         String email = "mail@.";
         Assertions.assertThrows(NotCorrectEmailException.class, () -> new User(login, email), "Check setMail method");
@@ -43,7 +43,7 @@ class UserTest {
 
     @Test
     @DisplayName("When login is not equals email, then parameters are correct")
-    void EqualsLoginAndMail() {
+    void equalsLoginAndMail() {
         String login = "@d.ru";
         String email = "@d.ru";
         Assertions.assertThrows(UserParametersIsEqualException.class, () -> new User(login, email), "It must throw exception!");
